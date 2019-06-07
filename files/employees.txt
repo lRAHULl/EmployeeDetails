@@ -1,0 +1,5 @@
+1	rahul	roman	19	7010339352	avadi	1234567890	a
+2	rakesh	kumar	20	23456789	mdgfbjdmfb	23456	u
+5	sri kanth	sekar	22	1234567890	abcde	12345	u
+8	prakash	kumar	20	123456789	yelagiri	12345	d
+9	becky	gomez	22	7839256791	ca	100000	a
