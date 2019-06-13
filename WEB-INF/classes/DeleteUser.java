@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.sql.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -13,30 +14,17 @@ public class DeleteUser extends HttpServlet {
     @Override
    public void doPost(HttpServletRequest request, HttpServletResponse response)
          throws IOException, ServletException {
-             String line;
-             File f = new File("C:/myWebProject/tomcat/webapps/EmployeeDetails/files/employees.txt");
              String id = request.getParameter("id");
-             boolean flag = false;
-             String oldText = "";
-             if (f.exists()) {
-                BufferedReader br = new BufferedReader(new FileReader(f));
-                while((line = br.readLine()) != null) {
-                   String[] words = line.split("\t");
-                   if (id.equals(words[0])) {
-                        flag = true;   
-                        continue;
-                   } else {
-                        oldText += line + "\r\n";
-                   }
-                }
-                br.close();
-             }
-             
-             if (flag) {
-                 FileWriter fw = new FileWriter(f);
-                 fw.write(oldText);
-                 fw.close();
-             }
+            
+             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", "root");
+                  Statement stmt = conn.createStatement();){
+                  System.out.println("here");
+                  String str = "DELETE FROM users WHERE id = " + id;
+                  stmt.execute(str);
+            } catch (Exception e) {
+                  System.out.println(e);
+            }
+
              response.sendRedirect("/EmployeeDetails");
    }
 }

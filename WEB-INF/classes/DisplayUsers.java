@@ -17,7 +17,6 @@ import javax.servlet.annotation.*;
 public class DisplayUsers extends HttpServlet {
     @Override
    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // File f = new File("C:/myWebProject/tomcat/webapps/EmployeeDetails/files/employees.txt");
         ArrayList<String[]> result = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", "root");
@@ -38,25 +37,6 @@ public class DisplayUsers extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
-        // String line;
-        // if (f.exists()) {
-        // BufferedReader br = new BufferedReader(new FileReader(f));
-        // while((line = br.readLine()) != null) {
-        //     String[] words = line.split("\t");
-        //     result.add(words);
-        // }
-        // br.close();
-        // }
-
-        // PrintWriter out = response.getWriter();
-
-        // for (int i = 0; i < result.size(); i++) {
-        //     for (int j = 0; j < result.get(0).length; j++) {
-        //         out.print(result.get(i)[j] + "\t");
-        //     }
-        //     out.println();
-        // }
 
         request.setAttribute("data", result);
 
